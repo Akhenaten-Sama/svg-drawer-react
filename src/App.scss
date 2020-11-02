@@ -9,13 +9,26 @@ $gray: #9b9b9b;
   width: 20%;
 }
 
-input {
+.header{
+  color: $white
+}
+
+
+.set-options{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  width: 60vw;
+}
+
+
+.form-input {
   font-family: inherit;
   width: 100%;
   border: 0;
   border-bottom: 2px solid $gray;
   outline: 0;
-  font-size: 1.3rem;
+  font-size: 1rem;
   color: $white;
   padding: 7px 0;
   background: transparent;
@@ -33,18 +46,18 @@ input {
 }
 
 .form__label {
-  position: absolute;
-  top: 0;
+  //position: absolute;
+ // top: 0;
   display: block;
   transition: 0.2s;
   font-size: 1rem;
   color: $gray;
 }
 
-input:focus {
+.form-input:focus {
   ~ .form__label {
-    position: absolute;
-    top: 0;
+    position: relative;
+    top: 3px;
     display: block;
     transition: 0.2s;
     font-size: 1rem;
@@ -78,7 +91,6 @@ input:focus {
 select{
   width: 20vw;
   height: 2em;
-  margin:1rem
 }
 
 .App-logo {

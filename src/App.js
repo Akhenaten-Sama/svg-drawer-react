@@ -23,7 +23,7 @@ function App() {
         x2:'',
         y1:'',
         y2:'',
-        color:'blue'
+        color:'black'
   })
   
 
@@ -42,7 +42,8 @@ const RemovePoint =(vector)=>{
       setState({
           
           ...state,
-          [vector]:state[vector]-1
+          [vector]:state[vector]-1,
+          
       
       })
      
@@ -60,13 +61,21 @@ const handleChange =(e)=>{
  }
 
 
-  console.log(state.shape)
+
   return (
     <div className="App">
-    <div>
-    <input type='color' name="color" onChange={handleChange}/>
-    <label for="select-shape">Choose a pet:</label>
 
+  <header>
+ <h1 className='header'>Shape Drawer</h1> 
+  
+  </header>
+ <div className='set-options'>
+    
+    <label for='color' id='color'>Choose Shape Color</label>
+    <input type='color' name="color" onChange={handleChange}/>
+    
+    
+    <label for="shape">Choose a Shape:</label>
     <select onChange={handleChange} name="shape" id="shape-select">
         <option value={null}>--Please choose an option--</option>
         <option value="Circle">Circle</option>
@@ -76,6 +85,8 @@ const handleChange =(e)=>{
         <option value="Polygon">Polygon</option>
         <option value="PolyLine">PolyLine</option>
     </select>
+    
+    
     </div>
     
     <Shape  

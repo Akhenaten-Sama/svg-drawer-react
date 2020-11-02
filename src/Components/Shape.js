@@ -18,11 +18,11 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
     
 
 	for (let index = 0; index < state.polyl; index++) {
-		polyline.push(<input name="polyg" onChange={handleChange} type="number" placeholder="point" />);
+		polyline.push(<input className='form-input' name="polyg" onChange={handleChange} type="number" placeholder="point" />);
 	}
 
 	for (let index = 0; index < state.polyg; index++) {
-		polygon.push(<input name="polyl" onChange={handleChange} type="number" placeholder="point" />);
+		polygon.push(<input className='form-input' name="polyl" onChange={handleChange} type="number" placeholder="point" />);
 	}
 
 	switch (shape) {
@@ -30,13 +30,13 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 			return (
 				<div className="options">
 					<div>
-						<input name="width" id="width" onChange={handleChange} type="number" placeholder="width" />
+						<input className='form-input' name="width" id="width" onChange={handleChange} type="number" placeholder="width" />
 						<label for="width" class="form__label">
 							Width
 						</label>
 					</div>
 
-					<input name="height" id="height" onChange={handleChange} type="number" placeholder="height" />
+					<input className='form-input' name="height" id="height" onChange={handleChange} type="number" placeholder="height" />
 					<label for="height" class="form__label">
 						Height
 					</label>
@@ -48,7 +48,10 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 		case 'Circle':
 			return (
 				<div className="options">
-					<input name="circle" onChange={handleChange} type="number" placeholder="radius" />
+                    <input className='form-input' name="circle" onChange={handleChange} type="number" placeholder="radius" />
+                    <label for="circle" class="form__label">
+						Radius
+					</label>
 					{ReactDOM.createPortal(circ, SVG)}
 				</div>
 			);
@@ -56,8 +59,14 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 		case 'Ellipse':
 			return (
 				<div className="options">
-					<input name="xradius"  onChange={handleChange} type="number" placeholder="xradius" />
-                    <input name="yradius"  onChange={handleChange} type="number" placeholder="yradius" />
+                    <input className='form-input' name="xradius"  onChange={handleChange} type="number" placeholder="xradius" />
+                    <label for="xradius" class="form__label">
+						Xradius
+					</label>
+                    <input className='form-input' name="yradius"  onChange={handleChange} type="number" placeholder="yradius" />
+                    <label for="yradius" class="form__label">
+						Yradius
+					</label>
                     {ReactDOM.createPortal(Ellipse, SVG) }
 				</div>
 			);
@@ -65,10 +74,22 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 		case 'Line':
 			return (
 				<div className="options">
-					<input name="x1" onChange={handleChange} type="number" placeholder="x1" />
-					<input name="x2" onChange={handleChange} type="number" placeholder="x2" />
-					<input name="y1" onChange={handleChange} type="number" placeholder="y2" />
-					<input name="y2" onChange={handleChange} type="number" placeholder="y2" />
+                    <input className='form-input' name="x1" onChange={handleChange} type="number" placeholder="x1" />
+                    <label for="x1" class="form__label">
+						x1
+					</label>
+                    <input className='form-input' name="x2" onChange={handleChange} type="number" placeholder="x2" />
+                    <label for="x2" class="form__label">
+						x2
+					</label>
+                    <input className='form-input' name="y1" onChange={handleChange} type="number" placeholder="y2" />
+                    <label for="y1" class="form__label">
+						y1
+					</label>
+                    <input className='form-input' name="y2" onChange={handleChange} type="number" placeholder="y2" />
+                    <label for="y2" class="form__label">
+						y2
+					</label>
 					{ReactDOM.createPortal(Line, SVG)}
 				</div>
 			);
