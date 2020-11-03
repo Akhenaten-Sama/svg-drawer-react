@@ -1,28 +1,32 @@
 import React, { useEffect } from 'react';
 import ReactDOM from 'react-dom';
 
-const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
+const Shape = ({ state, handleChange, handlePoint,addPoint, RemovePoint }) => {
 	const SVG = document.getElementById('svg');
-	const { width, height, circle, line, xradius, yradius, x1, x2, y1, y2, color, shape } = state;
-	useEffect(() => {});
+	const { width, height, circle, xradius, yradius, x1, x2, y1, y2, color, shape, polyline, polygon, points, points2 } = state;
+	useEffect(() => {
+        
+    });
 
-	console.log(state);
+	console.log(SVG);
 
-	let polygon = [];
-	let polyline = [];
+	let polyg = [];
+	let polyl = [];
     console.log(polyline)
 	let rect = React.createElement('rect', { width: width, x: 50, y: 50, stroke: color, height: height });
 	let Line = React.createElement('line', { x1: x1, x2: x2, y1: y1, y2: y2, stroke: color });
-    let circ = React.createElement('circle', { r: circle, cx: 55, cy: 75, stroke: color });
+    let circ = React.createElement('circle', { r: circle, cx: 180, cy: 75, stroke: color });
     let Ellipse = React.createElement('ellipse', {cx:55, cy:75, rx:xradius, ry:yradius, stroke: color})
+    let P1 = React.createElement('polygon', {points:points2.trimEnd(), stroke:color})
+    let P2 = React.createElement('polyline', {points:points.trimEnd(), stroke:color})
     
-
-	for (let index = 0; index < state.polyl; index++) {
-		polyline.push(<input className='form-input' name="polyg" onChange={handleChange} type="number" placeholder="point" />);
+console.log(points.trimEnd())
+	for (let index = 0; index <polyline; index++) {
+		polyl.push(<input className='form-input' name="points" onChange={addPoint} type="number" placeholder="point" />);
 	}
 
-	for (let index = 0; index < state.polyg; index++) {
-		polygon.push(<input className='form-input' name="polyl" onChange={handleChange} type="number" placeholder="point" />);
+	for (let index = 0; index <polygon; index++) {
+		polyg.push(<input className='form-input' name="points2" onChange={addPoint} type="number" placeholder="point" />);
 	}
 
 	switch (shape) {
@@ -40,8 +44,8 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 					<label for="height" class="form__label">
 						Height
 					</label>
-
-					{ReactDOM.createPortal(rect, SVG)}
+                    {ReactDOM.createPortal(rect, SVG)}
+					
 				</div>
 			);
 
@@ -52,7 +56,9 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
                     <label for="circle" class="form__label">
 						Radius
 					</label>
-					{ReactDOM.createPortal(circ, SVG)}
+                    {ReactDOM.createPortal(circ, SVG)}
+                   
+                    
 				</div>
 			);
 
@@ -96,18 +102,20 @@ const Shape = ({ state, handleChange, handlePoint, RemovePoint }) => {
 
 		case 'Polygon':
 			return (
-				<div className="options">
-					{polygon}
+				<div >
+					{polyg}
 					<button onClick={() => handlePoint(Object.keys(state)[0])}>Add New Point</button>
-					<button onClick={() => RemovePoint(Object.keys(state)[0])}>Remove Point</button>
+                    <button onClick={() => RemovePoint(Object.keys(state)[0])}>Remove Point</button>
+                    {ReactDOM.createPortal(P1, SVG)}
 				</div>
 			);
 		case 'PolyLine':
 			return (
-				<div>
-					{polyline}
+				<div >
+					{polyl}
 					<button onClick={() => handlePoint(Object.keys(state)[1])}>Add New Point</button>
-					<button onClick={() => RemovePoint(Object.keys(state)[1])}>Remove Point</button>
+                    <button onClick={() => RemovePoint(Object.keys(state)[1])}>Remove Point</button>
+                    {ReactDOM.createPortal(P2, SVG)}
 				</div>
 			);
 		default:

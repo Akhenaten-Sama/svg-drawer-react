@@ -8,12 +8,12 @@ function App() {
   
 
   const [ state, setState] = useState({
-    polyg:1, 
-    polyl:1,
-    polygon:"0 ",
-        polyline:'0 ',
+    polygon:1,
+    polyline:1,
     shape:null,
     width:'',
+    points:"",
+    points2:"",
         height:'',
         circle:'',
         line:'',
@@ -30,11 +30,12 @@ function App() {
 
   const handlePoint =(vector)=>{
         
-    setState({
-        ...state,
+    setState( {
+        
+      ...state,
         [vector]:state[vector]+1
     })
-    console.log([vector])
+    console.log(state[vector])
 }
 
 const RemovePoint =(vector)=>{
@@ -43,7 +44,8 @@ const RemovePoint =(vector)=>{
           
           ...state,
           [vector]:state[vector]-1,
-          
+        
+
       
       })
      
@@ -54,12 +56,26 @@ const RemovePoint =(vector)=>{
 const handleChange =(e)=>{
   const {name, value} = e.target
   setState({
+
       ...state,
       [name]:value
   })
    
  }
 
+ const Addpoint =(e)=>{
+  const {name, value} = e.target
+  
+  setTimeout(()=>{
+    setState({
+      ...state,
+      [name]:state[name].concat(value, " ")
+    })
+  }, 700)
+  
+ }
+
+ 
 
 
   return (
@@ -93,7 +109,8 @@ const handleChange =(e)=>{
     state={state}
     handleChange={handleChange}
     handlePoint = {handlePoint}
-    RemovePoint={RemovePoint}/>
+    RemovePoint={RemovePoint}
+    addPoint={Addpoint}/>
 
     <Logo />
     

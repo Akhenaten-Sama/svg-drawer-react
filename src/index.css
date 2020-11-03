@@ -19,8 +19,15 @@ label{
   color:white;
 }
 
-svg{
+svg  {
   background: white;
   margin-bottom: 2rem;
 }
+
+svg > *{
+  transition: all 4s ease-in-out;
+}
+
+
+
 
