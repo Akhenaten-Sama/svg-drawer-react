@@ -1,12 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 
 const Shape = ({ state, handleChange, handlePoint,addPoint, RemovePoint }) => {
 	const SVG = document.getElementById('svg');
 	const { width, height, circle, xradius, yradius, x1, x2, y1, y2, color, shape, polyline, polygon, points, points2 } = state;
-	useEffect(() => {
-        
-    });
+	
 
 	console.log(SVG);
 

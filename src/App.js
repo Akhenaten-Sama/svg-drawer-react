@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import {ReactComponent as Logo} from './logo.svg';
 import './App.scss';
 import Shape from './Components/Shape';

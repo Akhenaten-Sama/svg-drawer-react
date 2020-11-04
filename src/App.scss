@@ -19,6 +19,12 @@ $gray: #9b9b9b;
   flex-direction: row;
   justify-content: space-around;
   width: 60vw;
+  @media screen  and (max-width:560px){
+    display:grid;
+    gap:2rem;
+    width:80vw;
+    justify-items: center;
+  }
 }
 
 
@@ -102,6 +108,11 @@ select{
 #svg{
   width: 60vw;
   height:80vh;
+  @media screen  and (max-width:560px){
+    width:80%;
+    height:60vh;
+  }
+
 }
 
 
