@@ -6,11 +6,12 @@ const Shape = ({ state, handleChange, handlePoint,addPoint, RemovePoint }) => {
 	const { width, height, circle, xradius, yradius, x1, x2, y1, y2, color, shape, polyline, polygon, points, points2 } = state;
 	
 
-	console.log(SVG);
 
+/*    arrays to be  into polygon to add new points at button click */
 	let polyg = [];
 	let polyl = [];
-    console.log(polyline)
+	
+	/* individual svg subelements to be used with react portal */
 	let rect = React.createElement('rect', { width: width, x: 50, y: 50, stroke: color, height: height });
 	let Line = React.createElement('line', { x1: x1, x2: x2, y1: y1, y2: y2, stroke: color });
     let circ = React.createElement('circle', { r: circle, cx: 180, cy: 75, stroke: color });
@@ -18,7 +19,7 @@ const Shape = ({ state, handleChange, handlePoint,addPoint, RemovePoint }) => {
     let P1 = React.createElement('polygon', {points:points2.trimEnd(), stroke:color})
     let P2 = React.createElement('polyline', {points:points.trimEnd(), stroke:color})
     
-console.log(points.trimEnd())
+   /* array for mapping through states for polygon and polyline to render subelement*/
 	for (let index = 0; index <polyline; index++) {
 		polyl.push(<input className='form-input' name="points" onChange={addPoint} type="number" placeholder="point" />);
 	}
@@ -26,6 +27,9 @@ console.log(points.trimEnd())
 	for (let index = 0; index <polygon; index++) {
 		polyg.push(<input className='form-input' name="points2" onChange={addPoint} type="number" placeholder="point" />);
 	}
+
+
+	/* conditional rendering based on shape selected, then reactDOM.createPortal used to inject subelement into dom*/ 
 
 	switch (shape) {
 		case 'Rectangle':

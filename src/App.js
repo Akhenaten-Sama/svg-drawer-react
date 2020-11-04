@@ -1,121 +1,103 @@
-import React, {useState} from 'react'
-import {ReactComponent as Logo} from './logo.svg';
+import React, { useState } from 'react';
+import { ReactComponent as Logo } from './logo.svg';
 import './App.scss';
 import Shape from './Components/Shape';
 
 function App() {
-  
-  
+	/* state pre declared*/
 
-  const [ state, setState] = useState({
-    polygon:1,
-    polyline:1,
-    shape:null,
-    width:'',
-    points:"",
-    points2:"",
-        height:'',
-        circle:'',
-        line:'',
-        xradius:'',
-        yradius:'',
-        x1:'',
-        x2:'',
-        y1:'',
-        y2:'',
-        color:'black'
-  })
-  
+	const [ state, setState ] = useState({
+		polygon: 1,
+		polyline: 1,
+		shape: null,
+		width: '',
+		points: '',
+		points2: '',
+		height: '',
+		circle: '',
+		line: '',
+		xradius: '',
+		yradius: '',
+		x1: '',
+		x2: '',
+		y1: '',
+		y2: '',
+		color: 'black'
+	});
 
+	/* handle extra points input for polygon and polyline */
+	const handlePoint = (vector) => {
+		setState({
+			...state,
+			[vector]: state[vector] + 1
+		});
+		
+	};
 
-  const handlePoint =(vector)=>{
-        
-    setState( {
-        
-      ...state,
-        [vector]:state[vector]+1
-    })
-    console.log(state[vector])
-}
+	const RemovePoint = (vector) => {
+		if (state[vector] > 1) {
+			setState({
+				...state,
+				[vector]: state[vector] - 1
+			});
+		}
+	};
 
-const RemovePoint =(vector)=>{
-  if (state[vector]>1){
-      setState({
-          
-          ...state,
-          [vector]:state[vector]-1,
-        
+	/* handles shape change */
+	const handleChange = (e) => {
+		const { name, value } = e.target;
+		setState({
+			...state,
+			[name]: value
+		});
+	};
 
-      
-      })
-     
-  }
-  
-}
+	/* delays points by 700ms, to allow user finish typing input before updating state and svg */
+	const Addpoint = (e) => {
+		const { name, value } = e.target;
 
-const handleChange =(e)=>{
-  const {name, value} = e.target
-  setState({
+		setTimeout(() => {
+			setState({
+				...state,
+				[name]: state[name].concat(value, ' ')
+			});
+		}, 700);
+	};
 
-      ...state,
-      [name]:value
-  })
-   
- }
+	return (
+		<div className="App">
+			<header>
+				<h1 className="header">Shape Drawer</h1>
+			</header>
+			<div className="set-options">
+				<label for="color" id="color">
+					Choose Shape Color
+				</label>
+				<input type="color" name="color" onChange={handleChange} />
 
- const Addpoint =(e)=>{
-  const {name, value} = e.target
-  
-  setTimeout(()=>{
-    setState({
-      ...state,
-      [name]:state[name].concat(value, " ")
-    })
-  }, 700)
-  
- }
+				<label for="shape">Choose a Shape:</label>
+				<select onChange={handleChange} name="shape" id="shape-select">
+					<option value={null}>--Please choose an option--</option>
+					<option value="Circle">Circle</option>
+					<option value="Rectangle">Rectangle/Square</option>
+					<option value="Line">Line</option>
+					<option value="Ellipse">Ellipse</option>
+					<option value="Polygon">Polygon</option>
+					<option value="PolyLine">PolyLine</option>
+				</select>
+			</div>
 
- 
+			<Shape
+				state={state}
+				handleChange={handleChange}
+				handlePoint={handlePoint}
+				RemovePoint={RemovePoint}
+				addPoint={Addpoint}
+			/>
 
-
-  return (
-    <div className="App">
-
-  <header>
- <h1 className='header'>Shape Drawer</h1> 
-  
-  </header>
- <div className='set-options'>
-    
-    <label for='color' id='color'>Choose Shape Color</label>
-    <input type='color' name="color" onChange={handleChange}/>
-    
-    
-    <label for="shape">Choose a Shape:</label>
-    <select onChange={handleChange} name="shape" id="shape-select">
-        <option value={null}>--Please choose an option--</option>
-        <option value="Circle">Circle</option>
-        <option value="Rectangle">Rectangle/Square</option>
-        <option value="Line">Line</option>
-        <option value="Ellipse">Ellipse</option>
-        <option value="Polygon">Polygon</option>
-        <option value="PolyLine">PolyLine</option>
-    </select>
-    
-    
-    </div>
-    
-    <Shape  
-    state={state}
-    handleChange={handleChange}
-    handlePoint = {handlePoint}
-    RemovePoint={RemovePoint}
-    addPoint={Addpoint}/>
-
-    <Logo />
-    
-    </div>
-  );
+			<Logo />
+		</div>
+	);
 }
 
 export default App;
